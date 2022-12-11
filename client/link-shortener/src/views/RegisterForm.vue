@@ -1,0 +1,204 @@
+<!-- <template>
+  <div class="about">
+  <div class="card bg-light pt-1 pb-1" style="width: 18rem;">
+    <div class="card-body">
+    <label for="" class="card-text">Username</label><br>
+    <input type="text" placeholder="Username" class="form-control" aria-describedby="emailHelp">
+    <label for="">Password</label><br>
+    <input type="password" name="" id="" class="form-control" placeholder="Password">
+    <br>
+    <button class="btn btn-primary" @click="register()">Register</button>
+    <div class="formSubmitted" v-show="isComplete">
+      <br>
+      <p>Login </p> <router-link to="/login">here.</router-link>
+    </div>
+  </div>
+</div>
+</div>
+</template>
+
+<script>
+import { initializeApp } from "firebase/app"
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import axios from 'axios'
+const firebaseConfig = {
+  apiKey: "AIzaSyCkDyhh8uj0JUDRcpxqUMZUg8OKK1HI1Xk",
+  authDomain: "url-short-29989.firebaseapp.com",
+  databaseURL: "https://url-short-29989-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "url-short-29989",
+  storageBucket: "url-short-29989.appspot.com",
+  messagingSenderId: "127323251574",
+  appId: "1:127323251574:web:fde44de6a9227002389057"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+import { getAuth,  signInWithEmailAndPassword } from "firebase/auth";
+
+export default {
+data() {
+  return {
+      email: "",
+      password: "",
+      // id: 1,
+      invEmail: false,
+      invPassword: false,
+      wrongPassword: false,
+      emailExist: false 
+    }
+  },
+  methods: {
+    async loginSuccess(email, password) {
+    try {
+        const res = await axios.post("http://localhost:8080/user/register", {
+          email: this.email,
+          password: this.password
+        }).then((response)=>{
+          console.log(response)
+            // Signed in 
+            const uid = response.data
+            console.log(uid)
+            if(this.email !== null && this.password !== null){
+            this.isComplete = true
+            }
+            else if (this.email === "" && this.password === ""){
+              console.log('tes')
+              this.emailMissing = true
+              this.passwordMissing = true
+            }
+          console.log(response)
+        }
+        )}
+        catch (error) {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage)
+        // ..
+      }
+    },
+    getDetails() {
+      console.log('Successfully added')
+    }
+  }
+}
+</script>
+
+<style>
+@media (min-width: 1024px) {
+  .about {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+</style> -->
+
+<template>
+  <body>
+    <main>
+      <div class="position-absolute top-50 start-50 translate-middle">
+        <div class="card bg-light pt-1 pb-1 p-1 shadow-lg" style="width: 18rem;">
+          <div class="card-body">
+          <label for="" class="card-text">Email</label><br>
+          <input type="email" placeholder="Email" class="form-control" aria-describedby="emailHelp" v-model="email" v-bind:required="email">
+          <label for="">Password</label><br>
+          <input type="password" name="" id="" class="form-control" placeholder="Password" v-model="password" v-bind:required="password">
+          <div v-show="credMissing">
+            <p>Please enter the valid credentials.</p>
+          </div>
+          <div v-show="emailTaken">
+            <p>Email is already in use</p>
+          </div>
+          <div class="pt-3 left">
+            <button @click="register()" class="btn btn-primary">Register</button>
+          </div>
+          <div class="formSubmitted" v-show="isComplete">
+            <br>
+            <p>Login </p> <router-link to="/login">here.</router-link>
+          </div>
+        </div>
+      </div>
+      </div>
+    </main>
+  </body>
+</template>
+
+<script>
+// import { initializeApp } from "firebase/app"
+// import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import axios from 'axios'
+
+// const firebaseConfig = {
+//   apiKey: "AIzaSyBQ6TioiC86BAcKfleP6QTL0WUiWRRQUGg",
+//   authDomain: "express-crud1.firebaseapp.com",
+//   projectId: "express-crud1",
+//   storageBucket: "express-crud1.appspot.com",
+//   messagingSenderId: "450407551559",
+//   appId: "1:450407551559:web:68a374be04324096a4d762"
+// };
+
+// // Initialize Firebase
+// const app = initializeApp(firebaseConfig);
+// const auth = getAuth(app);
+
+export default {
+data() {
+  return {
+    email : "",
+    password : "",
+    isComplete: false,
+    credMissing: false,
+    emailTaken: false
+    }
+  },
+  methods: {
+    async register() {
+    try {
+        const res = await axios.post("http://localhost:8080/user/register", {
+          email: this.email,
+          password: this.password
+        }).then((response)=>{
+          console.log(response.data)
+          if(response.data.code != null){
+            this.$router.push("/register")
+            this.credMissing = true
+          }
+          else if(response.data.code == 'auth/email-already-in-use'){
+            this.emailTaken = true
+          }
+          // else if(response.data.code == 'auth/email-already-exists'){
+          //   this.$router.push("/about")
+          //   this.emailExist = true
+          // }
+          else {
+            console.log(response)
+              // Signed in 
+              const uid = response.data
+              console.log(uid)
+              if(this.email !== null && this.password !== null){
+              this.isComplete = true
+              }
+              else if (this.email === "" && this.password === ""){
+                console.log('tes')
+                this.emailMissing = true
+                this.passwordMissing = true
+              }
+            console.log(response)
+          }
+          }
+        )}
+        catch (error) {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage)
+        // ..
+      }
+    },
+    getDetails() {
+      console.log('Successfully added')
+    }
+  }
+}
+</script>
