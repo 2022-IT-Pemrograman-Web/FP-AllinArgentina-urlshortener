@@ -12,7 +12,7 @@ Website URL Shortener dengan fitur:
 - Halaman login/register
 - Dashboard
   - List rendering berisi link yang sudah dibuat
-  - View detail mengenai salah satu list, berisi click count (per hari/per bulan)
+  - View detail mengenai salah satu list, berisi click count
   - Form mengubah (update), penambahan (add), penghapusan (delete) short link
 - Terdapat request body validation
 - Semua operasi disimpan ke dalam firestore
