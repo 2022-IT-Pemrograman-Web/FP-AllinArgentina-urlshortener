@@ -1,5 +1,4 @@
 # pemrograman-web-fp
-Kelas Pemrograman Web (B)
 Nama Anggota Tim All in Argentina:
 - Aqil Sulthan Yuki Maye (5027211007)
 - Abdul Zaki Syahrul Rahmat (5027211020)
