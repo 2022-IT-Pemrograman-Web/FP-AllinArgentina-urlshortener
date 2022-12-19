@@ -24,10 +24,7 @@
             <input type="text" class="form-control mb-2" id="inlineFormInput" v-model="shortUrl" placeholder="itscampus">
           </div>
           <div class="col-auto">
-            <!-- <label class="sr-only" for="inlineFormInputGroup">Enter Short Link</label> -->
-            <!-- <div class="input-group mb-2">
-              <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="myITS">
-            </div> -->
+            
           </div>
           <div class="col-auto">
           </div>
@@ -51,10 +48,7 @@
         <a href="#" class="btn btn-danger" v-if="!links.showEdit" @click="deleteDetails(links.shortUrl)">Delete</a>
         <a href='#' class="btn btn-secondary" v-if="!links.showEdit" @click="links.showEdit = !links.showEdit">Edit</a>
         <div v-if="links.showEdit">
-          <!-- <div class="col-auto">
-            <label class="sr-only" for="inlineFormInput">Enter New URL here</label>
-            <input type="text" class="form-control mb-2" id="inlineFormInput" v-model="newfullUrl" placeholder="my.its.ac.id">
-          </div> -->
+          
           <div class="col-auto">
             <label class="sr-only" for="inlineFormInput">Enter New Title here</label>
             <input type="text" class="form-control mb-2" id="inlineFormInput" v-model="newurlTitle" placeholder="MyITS">
@@ -113,7 +107,6 @@ export default {
   },
   methods: {
     
-
     async postDetails() {
       const res = await axios.post("http://localhost:8080/api/post", {
         urlTitle: this.urlTitle,
