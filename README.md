@@ -1,10 +1,13 @@
 # pemrograman-web-fp
-Nama Anggota Tim All in Argentina:
+
+Final Project Pemrograman Web (B) 2022/2023
+
+Nama Anggota Tim **All in Argentina**:
 - Aqil Sulthan Yuki Maye (5027211007)
 - Abdul Zaki Syahrul Rahmat (5027211020)
 - Athaya Reyhan Nugroho (5027211067)
 
-## about
+## About
 Website URL Shortener dengan fitur:
 - Halaman login/register
 - Dashboard
@@ -15,6 +18,6 @@ Website URL Shortener dengan fitur:
 - Semua operasi di store ke dalam firestore
 - Semua akses ke firestore melalui API dengan expressJS
 
-## folder
+## Folder Guide
 - client untuk front-end
 - server untuk back-end
